@@ -80,4 +80,23 @@ It appears that the warm category generally tends to have higher mean outage dur
 ## Assessment of Missingness
 It appears that the CAUSE.CATEGORY.DETAIL column could be NMAR. This is because even though the missing values may have some dependence on the CAUSE.CATEGORY column, the missingness of this column are really dependent on the values themselves since the detail of why a power outage occurred can be explained without looking at data from the other columns. The missingness of this column can be MAR if we had info on the weather patterns at the time of the outage as well as access to the local news, especially if the outage occurred due to a public appeal.
 
+A permutation test was developed to compare the missingness of CUSTOMERS.AFFECTED and how it affected whether the CLIMATE.CATEGORY was 'warm' or 'cold'. Rows with the 'normal' label were omitted for this test. The initial distribution of these two columns is shown below.
 
+<iframe
+  src="assets/category-customers-missingness-distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+It can be noted that the proportions are relatively similar for both the 'warm' and 'cold' distributions. A permutation test was run, and the results are shown below. The TVD was used as the test statistic.
+
+Null Hypothesis: The distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is missing is the same as the distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is not missing.
+Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED affects the distribution of CLIMATE.CATEGORY.
+<iframe
+  src="assets/category-customers-missingness-empirical-distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+The vertical line in red represents the observed TVD statistic, with a p-value of 0.128. Since this p-value is greater than the alpha=0.05 threshold, we fail to reject the null hypothesis. Therefore, we can conclude that the missingness of CUSTOMERS.AFFECTED is not dependent on CLIMATE.CATEGORY.
