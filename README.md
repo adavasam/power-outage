@@ -38,7 +38,6 @@ The first 5 rows of the cleaned DataFrame is shown below.
 |   2012 |       6 | Minnesota    | MRO           | East North Central |            -0.1 | normal             | severe weather     | thunderstorm            |              2550 |          9.19 |      5380443 |
 |   2015 |       7 | Minnesota    | MRO           | East North Central |             1.2 | warm               | severe weather     | nan                     |              1740 |         10.43 |      5489594 |
 
-### Univariate Analysis
 As a form of preliminary analysis, a univariate distribution of the different events that led to a power outage is shown below.
 
 <iframe
@@ -76,3 +75,8 @@ The dataframe was grouped by the climate region and climate category in an effor
 | West North Central |  200     |   28.4286 | 2486.5  |
 
 It appears that the warm category generally tends to have higher mean outage durations, except for the Central and East North Central regions, where the cold category has higher averages. This may suggest how regions that are warm may lead to the power outage to last for a longer time.
+
+## Assessment of Missingness
+It appears that the CAUSE.CATEGORY.DETAIL column could be NMAR. This is because even though the missing values may have some dependence on the CAUSE.CATEGORY column, the missingness of this column are really dependent on the values themselves since the detail of why a power outage occurred can be explained without looking at data from the other columns. The missingness of this column can be MAR if we had info on the weather patterns at the time of the outage as well as access to the local news, especially if the outage occurred due to a public appeal.
+
+
