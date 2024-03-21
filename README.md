@@ -38,3 +38,13 @@ The first 5 rows of the cleaned DataFrame is shown below.
 |   2012 |       6 | Minnesota    | MRO           | East North Central |            -0.1 | normal             | severe weather     | thunderstorm            |              2550 |          9.19 |      5380443 |
 |   2015 |       7 | Minnesota    | MRO           | East North Central |             1.2 | warm               | severe weather     | nan                     |              1740 |         10.43 |      5489594 |
 
+As a form of preliminary analysis, a univariate distribution of the different events that led to a power outage is shown below.
+
+<iframe
+  src="assets/power-outage-causes.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+As expected, severe weather was the main cause of a power outage. However, it was interesting that intentional attacks came second, suggesting that a good portion of power outages are intentional.
