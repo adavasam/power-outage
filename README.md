@@ -94,7 +94,7 @@ It can be noted that the proportions are relatively similar for both the 'warm' 
 Null Hypothesis: The distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is missing is the same as the distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is not missing.
 Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED affects the distribution of CLIMATE.CATEGORY.
 <iframe
-  src="assets/category-customers-missingness-empirical-distribution.html"
+  src="assets/category-customers-missingness-emp-distribution.html"
   width="800"
   height="600"
   frameborder="0"
