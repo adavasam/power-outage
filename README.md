@@ -28,7 +28,8 @@ The dataset originally contained 53 columns, however, only 12 columns were retai
 
 Rows that had Hawaii or Alaska were removed, as these states are not a part of the contiguous U.S. states, and may introduce data that is outside the scope of this analysis as these two states are located in very different regions. As a result, there were 1528 rows in the modified dataset.
 
-The first 5 rows of the cleaned DataFrame is shown below:
+The first 5 rows of the cleaned DataFrame is shown below.
+
 |   YEAR |   MONTH | U.S._STATE   | NERC.REGION   | CLIMATE.REGION     |   ANOMALY.LEVEL | CLIMATE.CATEGORY   | CAUSE.CATEGORY     | CAUSE.CATEGORY.DETAIL   |   OUTAGE.DURATION |   TOTAL.PRICE |   POPULATION |
 |-------:|--------:|:-------------|:--------------|:-------------------|----------------:|:-------------------|:-------------------|:------------------------|------------------:|--------------:|-------------:|
 |   2011 |       7 | Minnesota    | MRO           | East North Central |            -0.3 | normal             | severe weather     | nan                     |              3060 |          9.28 |      5348119 |
