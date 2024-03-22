@@ -2,9 +2,9 @@
 by Aakash Davasam
 
 ## Introduction
-Access to electricity and power is becoming more vital than ever as we live in a tech-centric world. With the rise in the implementation of bleeding-edge machine technology in applications that were once thought mundane, having adequate access to electricity is necessary to make the proper advancements. Understanding the causes of power outages and how they vary in different regions can help us develop new and more advanced infrastructure that would decrease the number of power outages in a given area.
+Access to electricity and power is becoming more vital than ever as we live in a tech-centric world. With the rise in the implementation of bleeding-edge machine technology in numerous applications, having adequate access to electricity is necessary to make the proper advancements. Understanding the causes of power outages and how they vary in different regions can help us develop new and more advanced infrastructure that would decrease the number of power outages in a given area.
 
-Question: What are the main causes of power outages, and how do they vary across different regions?
+Question: What are the main causes of power outages, and how do they vary across different regions/climates?
 
 The dataset used for this analysis was obtained from the [Purdue Power Outage dataset](https://engineering.purdue.edu/LASCI/research-data/outages). There are 1534 rows in this dataset, with the relevant columns and column descriptions (derived from [this study](https://doi.org/10.1016/j.dib.2018.06.067)) used for analysis:
 
@@ -88,11 +88,10 @@ A permutation test was developed to compare the missingness of CUSTOMERS.AFFECTE
   height="600"
   frameborder="0"
 ></iframe>
-
 It can be noted that the proportions are relatively similar for both the 'warm' and 'cold' distributions. A permutation test was run, and the results are shown below. The TVD was used as the test statistic.
 
-Null Hypothesis: The distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is missing is the same as the distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is not missing.
-Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED affects the distribution of CLIMATE.CATEGORY.
+**Null Hypothesis:** The distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is missing is the same as the distribution of CLIMATE.CATEGORY when CUSTOMERS.AFFECTED is not missing.
+**Alternative Hypothesis:** The missingness of CUSTOMERS.AFFECTED affects the distribution of CLIMATE.CATEGORY.
 <iframe
   src="assets/category-customers-missingness-emp-distribution.html"
   width="800"
@@ -100,3 +99,23 @@ Alternative Hypothesis: The missingness of CUSTOMERS.AFFECTED affects the distri
   frameborder="0"
 ></iframe>
 The vertical line in red represents the observed TVD statistic, with a p-value of 0.128. Since this p-value is greater than the alpha=0.05 threshold, we fail to reject the null hypothesis. Therefore, we can conclude that the missingness of CUSTOMERS.AFFECTED is not dependent on CLIMATE.CATEGORY.
+
+## Hypothesis Testing
+I ran a permutation test to determine whether the population distributions vary between a 'warm' and 'cold' climate category. Determining the answer to this can help justify whether the cause of a power outage can also be influenced by the population of a cold or warm area.
+
+**Null Hypothesis:** Alternative Hypothesis: In the entire dataset, the population of people in 'cold' and 'warm' climate categories have the same distribution, and the observed differences in our samples are due to random chance.
+
+**Alternative Hypothesis:** A 'cold' climate category has a larger population than the 'warm' climate category.
+
+**Test Statistic and Significance Level:** Difference in group means (warm - cold), with alpha=0.05.
+
+After permuting the group means, the following distribution below was created:
+
+<iframe
+  src="assets/permutation-test.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The observed difference is shown in the vertical red line. With the p-value being 0.001, which is less than the significance threshold of 0.05, we reject the null hypothesis. It appears to be the case that a 'cold' climate category generally has higher populations than a 'warm' climate category.
