@@ -85,7 +85,7 @@ A permutation test was developed to compare the missingness of CUSTOMERS.AFFECTE
 <iframe
   src="assets/category-customers-missingness-distribution.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 It can be noted that the proportions are relatively similar for both the 'warm' and 'cold' distributions. A permutation test was run, and the results are shown below. The TVD was used as the test statistic.
@@ -95,7 +95,7 @@ It can be noted that the proportions are relatively similar for both the 'warm' 
 <iframe
   src="assets/category-customers-missingness-emp-distribution.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 The vertical line in red represents the observed TVD statistic, with a p-value of 0.128. Since this p-value is greater than the alpha=0.05 threshold, we fail to reject the null hypothesis. Therefore, we can conclude that the missingness of CUSTOMERS.AFFECTED is not dependent on CLIMATE.CATEGORY.
