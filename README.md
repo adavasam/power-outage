@@ -80,12 +80,13 @@ It appears that the warm category generally tends to have higher mean outage dur
 ## Assessment of Missingness
 It appears that the CAUSE.CATEGORY.DETAIL column could be NMAR. This is because even though the missing values may have some dependence on the CAUSE.CATEGORY column, the missingness of this column are really dependent on the values themselves since the detail of why a power outage occurred can be explained without looking at data from the other columns. The missingness of this column can be MAR if we had info on the weather patterns at the time of the outage as well as access to the local news, especially if the outage occurred due to a public appeal.
 
+#### Test 1
 A permutation test was developed to compare the missingness of CUSTOMERS.AFFECTED and how it affected whether the CLIMATE.CATEGORY was 'warm' or 'cold'. Rows with the 'normal' label were omitted for this test. The initial distribution of these two columns is shown below.
 
 <iframe
-  src="assets/category-customers-missingness-distribution.html"
+  src="assets/mis1-distribution.html"
   width="800"
-  height="500"
+  height="420"
   frameborder="0"
 ></iframe>
 It can be noted that the proportions are relatively similar for both the 'warm' and 'cold' distributions. A permutation test was run, and the results are shown below. The TVD was used as the test statistic.
@@ -94,12 +95,37 @@ It can be noted that the proportions are relatively similar for both the 'warm' 
 
 **Alternative Hypothesis:** The missingness of CUSTOMERS.AFFECTED affects the distribution of CLIMATE.CATEGORY.
 <iframe
-  src="assets/category-customers-missingness-emp-distribution.html"
+  src="assets/mis1-emp-distribution.html"
   width="800"
-  height="500"
+  height="420"
   frameborder="0"
 ></iframe>
-The vertical line in red represents the observed TVD statistic, with a p-value of 0.128. Since this p-value is greater than the alpha=0.05 threshold, we fail to reject the null hypothesis. Therefore, we can conclude that the missingness of CUSTOMERS.AFFECTED is not dependent on CLIMATE.CATEGORY.
+The vertical line in red represents the observed TVD statistic, with a p-value of 0.128. Since this p-value is greater than the alpha=0.05 threshold, we fail to reject the null hypothesis. However, even though we fail to reject the null, it should still be noted that an argument can be made that the missingness of CUSTOMERS.AFFECTED is MAR and can be dependent on CLIMATE.CATEGORY. This could be due to how the weather patterns can differently affect the number of customers. More data is required to better conclude if the null hypothesis can be rejected.
+
+#### Test 2
+Another permutation test was carried out to assess the missingness of the ANOMALY.LEVEL on the POPULATION column. These two columns are not dependent with each other, as the state population has no affect on the anomaly level at all.
+
+<iframe
+  src="assets/mis1-distribution.html"
+  width="800"
+  height="420"
+  frameborder="0"
+></iframe>
+
+Even though the distribution may appear similar, the K-S statistic was not implemented as the test statistic since the shapes are still different. The difference in group means was used as the test statistic instead.
+
+**Null Hypothesis:** The distribution of POPULATION when ANOMALY.LEVEL is missing is the same as the distribution of POPULATION when ANOMALY.LEVEL is not missing.
+
+**Alternative Hypothesis:** The missingness of ANOMALY.LEVEL affects the distribution of POPULATION.
+
+<iframe
+  src="assets/mis2-emp-distribution.html"
+  width="800"
+  height="420"
+  frameborder="0"
+></iframe>
+
+With a p-value of 0.124, we fail to reject the null. It cannot be concluded that these two columns affect each other, which makes sense because the state population is a number derived from the Census.
 
 ## Hypothesis Testing
 I ran a permutation test to determine whether the population distributions vary between a 'warm' and 'cold' climate category. Determining the answer to this can help justify whether the cause of a power outage can also be influenced by the population of a cold or warm area.
@@ -115,7 +141,7 @@ After permuting the group means, the following distribution below was created:
 <iframe
   src="assets/permutation-test.html"
   width="800"
-  height="500"
+  height="420"
   frameborder="0"
 ></iframe>
 
