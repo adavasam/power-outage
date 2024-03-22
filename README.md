@@ -44,7 +44,7 @@ As a form of preliminary analysis, a univariate distribution of the different ev
 <iframe
   src="assets/power-outage-causes.html"
   width="800"
-  height="600"
+  height="420"
   frameborder="0"
 ></iframe>
 
@@ -55,7 +55,7 @@ Additionally, the relationship between the average monthly electricity price (TO
 <iframe
   src="assets/state-vs-price.html"
   width="800"
-  height="600"
+  height="420"
   frameborder="0"
 ></iframe>
 
@@ -153,9 +153,18 @@ I will predict whether the cause of a major power outage is weather-related usin
 ## Baseline Model
 In the baseline model, I used a decision tree classifier. First, I binarized the CAUSE.CATEGORY column so it only shows whether or not the cause was weather-related. For the prediction, I used two columns from the power outage dataset: CLIMATE.REGION and ANOMALY.LEVEL. The CLIMATE.REGION column is a nominal categorical variable, and this was one-hot encoded (with the first variable dropped) during the preprocessing state. The ANOMALY.LEVEL is a continuous numerical variable, and no transformations were performed on this column.
 
-The performance of the model was decent, but better than expected considering that only two columns were used. After splitting the dataset into train/test data and training the model on the training data, the accuracy of the training set was 0.742 and 0.714 for the test set. However, as mentioned above, accuracy is not the best metric so the F1-score was also calculated. When compared to a series of predicted outcomes, the F1-score came out to be 0.720. Since the score is larger than 0.5, this suggests that there's a little bit of a balance between precision and recall, but it is not perfect since not all the false positives and false negatives are minimized.
+The performance of the model was decent, but better than expected considering that only two columns were used. After splitting the dataset into train/test data and training the model on the training data, the accuracy of the training set was 0.756 and 0.668 for the test set. However, as mentioned above, accuracy is not the best metric so the F1-score was also calculated. When compared to a series of predicted outcomes, the F1-score came out to be 0.691. Since the score is larger than 0.5, this suggests that there's a little bit of a balance between precision and recall, but it is not perfect since not all the false positives and false negatives are minimized.
 
 ## Final Model
 In the final model, I added the POPULATION column (standardized during processing) as well as the TOTAL.PRICE column (quantile transformed during processing). This is because power outages can be affected by the number of people on that grid and a higher average monthly price may indicate that it would cost more to maintain the infrastructure. Therefore, I believed these two columns are good for the prediction task.
 
-I decided to choose the random forest classifer model, with the n_estimators being 200 and max_depth equaling 10. These hyperparameters were optimzed using the GridSearchCV method. The final model's F1-score is 0.789, which is quite an improvement from the baseline model. This shows how the model is doing decently well in minimizing both the false positives and false negatives. The accuracies also increased compared to the baseline model, but those values are not reported as they pose a false reflection on the quality of the model due to an uneven distribution of data in the dataset.
+I decided to choose the random forest classifer model, with the n_estimators being 200 and max_depth equaling 10. These hyperparameters were optimzed using the GridSearchCV method. The final model's F1-score is 0.769, which is quite an improvement from the baseline model. This shows how the model is doing decently well in minimizing both the false positives and false negatives. The accuracies also increased compared to the baseline model, but those values are not reported as they pose a false reflection on the quality of the model due to an uneven distribution of data in the dataset.
+
+## Fairness Analysis
+I chose to compare the model distribution of low and high populations and see if that affected the fairness of the model in any way. I used a threshold of 8000000 to binarize the POPULATION column. The test statistic used was the TVD with a significance level of 0.05.
+
+**Null Hypothesis:** The model is fair. The TVD for smaller and larger populations are about the same, and any differences can be explained by random chance.
+
+**Alternative Hypothesis:** The model is unfair, as the TVD is much larger than the permuted distributions.
+
+After running the permutation test, we can reject the null, since the p-value was 0.0. This shows how this model can be unfair to a lower population.
